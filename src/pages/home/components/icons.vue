@@ -1,82 +1,93 @@
 <template>
  <div class="iconsdiv">
-   <div class="icon">
+   <swiper>
+   <swiper-slide v-for="(item1,index) of page" :key="index">
+   <div class="icon" v-for="item of item1" :key="item.id">
      <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png"/><!--因为之前的测试适应的是50X50像素的图片所以超过此像素的图片会显示异常（UI中会很大）所以此时在img标签设置长宽就可以了-->
+       <img class="imgcontent" :src="item.imgurl"/><!--因为之前的测试适应的是50X50像素的图片所以超过此像素的图片会显示异常（UI中会很大）所以此时在img标签设置长宽就可以了-->
      </div>
      <p class="content">
-       景点门票
+       {{item.desc}}
      </p>
-   </div>
-   <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png"/>
      </div>
-     <p class="content">
-       一日游
-     </p>
-  </div>
-  <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png"/>
-     </div>
-     <p class="content">
-       踏青赏花
-     </p>
-  </div>
-  <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png"/>
-     </div>
-     <p class="content">
-       郑州方特
-     </p>
-  </div>
-  <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/e98eea7ed037b04a5af0250ca8a1abd7.png"/>
-     </div>
-     <p class="content">
-       少林寺
-     </p>
-  </div>
-  <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1803/8c/47630407f70e8302.png"/>
-     </div>
-     <p class="content">
-       电影小镇
-     </p>
-  </div>
-  <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png"/>
-     </div>
-     <p class="content">
-       亲子乐园
-     </p>
-  </div>
-  <div class="icon">
-     <div class="divimg">
-       <img class="imgcontent" src="http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png"/>
-     </div>
-     <p class="content">
-       海洋游乐园
-     </p>
-  </div>
+  </swiper-slide>
+  </swiper>
  </div>
 </template>
 <script>
 export default{
-  name: 'homeicons'
+  name: 'homeicons',
+  data () {
+    return {
+      iconslist: [{
+        id: 1,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
+        desc: '景点门票'
+      },
+      {
+        id: 2,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
+        desc: '一日游'
+      },
+      {
+        id: 3,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png',
+        desc: '踏青赏花'
+      },
+      {
+        id: 4,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png',
+        desc: '少林寺'
+      },
+      {
+        id: 5,
+        imgurl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/e98eea7ed037b04a5af0250ca8a1abd7.png',
+        desc: '电影小镇'
+      },
+      {
+        id: 6,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/8c/47630407f70e8302.png',
+        desc: '双人行'
+      },
+      {
+        id: 7,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png',
+        desc: '亲子乐园'
+      },
+      {
+        id: 8,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png',
+        desc: '海洋游乐园'
+      },
+      {
+        id: 9,
+        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
+        desc: '景点门票'
+      }]
+    }
+  },
+  computed: {
+    page () {
+      const pages = []
+      this.iconslist.forEach((item, index) => {
+        const page = Math.floor(index / 8)
+        if (!pages[page]) {
+          pages[page] = []
+          pages[page].push(item)
+        }
+        else {
+          pages[page].push(item)
+        }
+      })
+      return pages
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
-.iconsdiv
+.iconsdiv >>> .swiper-container
   height:0;
-  width:100%;
-  padding-bottom:10rem;/*见下*/
-  overflow:hidden;
+  padding-bottom:4rem;/*见下*/
   .icon
     padding-top:.2rem;
     float:left;
