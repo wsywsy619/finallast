@@ -74,8 +74,7 @@ export default{
         if (!pages[page]) {
           pages[page] = []
           pages[page].push(item)
-        }
-        else {
+        } else {
           pages[page].push(item)
         }
       })
