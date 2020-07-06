@@ -1,10 +1,10 @@
 <template>
  <div class="iconsdiv">
-   <swiper>
+   <swiper :options="swiperOptions">
    <swiper-slide v-for="(item1,index) of page" :key="index">
    <div class="icon" v-for="item of item1" :key="item.id">
      <div class="divimg">
-       <img class="imgcontent" :src="item.imgurl"/><!--因为之前的测试适应的是50X50像素的图片所以超过此像素的图片会显示异常（UI中会很大）所以此时在img标签设置长宽就可以了-->
+       <img class="imgcontent" :src="item.imgUrl"/><!--因为之前的测试适应的是50X50像素的图片所以超过此像素的图片会显示异常（UI中会很大）所以此时在img标签设置长宽就可以了-->
      </div>
      <p class="content">
        {{item.desc}}
@@ -17,59 +17,20 @@
 <script>
 export default{
   name: 'homeicons',
+  props: {
+    iconlist: Array
+  },
   data () {
     return {
-      iconslist: [{
-        id: 1,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '景点门票'
-      },
-      {
-        id: 2,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-        desc: '一日游'
-      },
-      {
-        id: 3,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png',
-        desc: '踏青赏花'
-      },
-      {
-        id: 4,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/95/8246f27355943202.png',
-        desc: '少林寺'
-      },
-      {
-        id: 5,
-        imgurl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/e98eea7ed037b04a5af0250ca8a1abd7.png',
-        desc: '电影小镇'
-      },
-      {
-        id: 6,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/8c/47630407f70e8302.png',
-        desc: '双人行'
-      },
-      {
-        id: 7,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png',
-        desc: '亲子乐园'
-      },
-      {
-        id: 8,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png',
-        desc: '海洋游乐园'
-      },
-      {
-        id: 9,
-        imgurl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '景点门票'
-      }]
+      swiperOptions: {
+        autoplay: false
+      }
     }
   },
   computed: {
     page () {
       const pages = []
-      this.iconslist.forEach((item, index) => {
+      this.iconlist.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []

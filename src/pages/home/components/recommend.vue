@@ -4,7 +4,7 @@
   <ul>
     <li class="item border-bottom" v-for="item of recommendlist" :key="item.id">
       <div class="item-img-wrapper">
-        <img class="item-img" :src='item.imgurl'/>
+        <img class="item-img" :src='item.imgUrl'/>
       </div>
       <div class="item-info">
         <p class="item-title">{{item.title}}</p>
@@ -18,36 +18,8 @@
 <script>
 export default{
   name: 'homerecomsmend',
-  data () {
-    return {
-      recommendlist: [{
-        id: 1,
-        imgurl: 'http://img1.qunarzz.com/sight/p0/1909/5b/5b96def9b5592837a3.img.jpg_250x250_b6cb7378.jpg',
-        title: '建业•华谊兄弟电影小镇',
-        desc: '极具风格小资的异域小镇'
-      },
-      {id: 2,
-        imgurl: 'http://img1.qunarzz.com/sight/p0/1804/ad/ad51f742c4e58127a3.img.jpg_200x200_d3bbac0a.jpg',
-        title: '郑州方特梦幻王国',
-        desc: '给你带来足够的欢乐'
-      },
-      {id: 3,
-        imgurl: 'http://img1.qunarzz.com/sight/p0/1909/5b/5b96def9b5592837a3.img.jpg_250x250_b6cb7378.jpg',
-        title: '禅宗少林音乐大典',
-        desc: '冥冥之音视听享受'
-      },
-      {id: 4,
-        imgurl: 'http://img1.qunarzz.com/sight/p0/1903/fd/fde2db370b42593ea3.img.jpg_200x200_88130ac8.jpg',
-        title: '银基冰雪世界',
-        desc: '冰雪风情，夏天也能玩雪'
-      },
-      {id: 5,
-        imgurl: 'http://img1.qunarzz.com/sight/p0/1605/97/970d5ffe183b4f2190.img.jpg_200x200_ca53c65b.jpg',
-        title: '郑州方特水上乐园',
-        desc: '你玩水水玩你！'
-      }
-      ]
-    }
+  props: {
+    recommendlist: Array
   }
 }
 </script>
