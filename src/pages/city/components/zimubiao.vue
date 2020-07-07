@@ -1,37 +1,15 @@
 <template>
 <div class="header">
 <ul>
-<li>A</li>
-<li>B</li>
-<li>C</li>
-<li>D</li>
-<li>E</li>
-<li>F</li>
-<li>G</li>
-<li>H</li>
-<li>I</li>
-<li>G</li>
-<li>K</li>
-<li>L</li>
-<li>M</li>
-<li>N</li>
-<li>O</li>
-<li>P</li>
-<li>Q</li>
-<li>R</li>
-<li>A</li>
-<li>A</li>
-<li>A</li>
-<li>A</li>
-<li>A</li>
-<li>A</li>
+<li v-for="(item,key) of cities" :key="key">{{key}}</li>
 </ul>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'cityzimu'
+  name: 'cityzimu',
+  props: ['cities']
 }
 </script>
 

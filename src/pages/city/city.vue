@@ -4,14 +4,15 @@
 </cityheader>
 <citysearch>
 </citysearch>
-<citylist>
+<citylist :cities="cities" :hot="hotCities">
 </citylist>
-<cityzimu>
+<cityzimu :cities="cities">
 </cityzimu>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 import cityheader from './components/header'
 import citysearch from './components/search.vue'
 import citylist from './components/list.vue'
@@ -23,6 +24,29 @@ export default {
     citysearch,
     citylist,
     cityzimu
+  },
+  data () {
+    return {
+      cities: {},
+      hotCities: []
+    }
+  },
+  methods: {
+    getCityInfo () {
+      axios.get('/api/city.json')
+        .then(this.handelGetCity)
+    },
+    handelGetCity (res) {
+      res = res.data
+      if (res.ret && res.data) {
+        const data = res.data
+        this.cities = data.cities
+        this.hotCities = data.hotCities
+      }
+    }
+  },
+  mounted () {
+    this.getCityInfo()
   }
 }
 </script>
