@@ -2,7 +2,7 @@
 <div>
 <cityheader>
 </cityheader>
-<citysearch>
+<citysearch :cities="cities">
 </citysearch>
 <citylist :cities="cities" :hot="hotCities" :change="change">
 </citylist>
