@@ -1,7 +1,16 @@
 <template>
 <div class="header">
 <ul>
-<li v-for="(item,key) of cities" :key="key">{{key}}</li>
+<li v-for="item of letters"
+    :key="item"
+    :ref="item"
+    @touchstart="handletouchstart"
+    @touchmove="handletouchmove"
+    @touchend="handeltouchend"
+    @click="handleletter"
+>
+  {{item}}
+</li>
 </ul>
 </div>
 </template>
@@ -9,7 +18,52 @@
 <script>
 export default {
   name: 'cityzimu',
-  props: ['cities']
+  data () {
+    return {
+      touchstatus: false,
+      x: 0,
+      timer: null
+    }
+  },
+  props: ['cities'],
+  computed: {
+    letters () {
+      const letters = []
+      for (let i in this.cities) {
+        letters.push(i)
+      }
+      return letters
+    }
+  },
+  updated () {
+    const q = this.$refs['A'][0].offsetTop
+    this.x = q
+  },
+  methods: {
+    handleletter (e) {
+      this.$emit('change', e.target.innerText)
+    },
+    handletouchstart (e) {
+      this.touchstatus = true
+    },
+    handletouchmove (e) {
+      if (this.touchstatus) {
+        if (this.timer) {
+          clearTimeout(this.timer)
+        }
+        this.timer = setTimeout(() => {
+          const y = e.touches[0].clientY - 83
+          const x = Math.floor((y - this.x) / 20)
+          if (x >= 0 && x < this.letters.length) {
+            this.$emit('change', this.letters[x])
+          }
+        }, 16)
+      }
+    },
+    handeltouchend (e) {
+      this.touchstatus = false
+    }
+  }
 }
 </script>
 

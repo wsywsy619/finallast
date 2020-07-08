@@ -4,9 +4,9 @@
 </cityheader>
 <citysearch>
 </citysearch>
-<citylist :cities="cities" :hot="hotCities">
+<citylist :cities="cities" :hot="hotCities" :change="change">
 </citylist>
-<cityzimu :cities="cities">
+<cityzimu :cities="cities" @change="handlechange">
 </cityzimu>
 </div>
 </template>
@@ -28,10 +28,14 @@ export default {
   data () {
     return {
       cities: {},
-      hotCities: []
+      hotCities: [],
+      change: ''
     }
   },
   methods: {
+    handlechange (x) {
+      this.change = x
+    },
     getCityInfo () {
       axios.get('/api/city.json')
         .then(this.handelGetCity)
