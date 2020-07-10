@@ -5,7 +5,7 @@
 </div>
 <div class="searchcontent" v-show="keyword" ref="qw">
 <ul>
-<li v-for="(item,index) of result" class="item1 border-bottom" :key="index">{{item}}</li>
+<li v-for="(item,index) of result" class="item1 border-bottom" :key="index" @click="handleclick(item1)">{{item}}</li>
 </ul>
 </div>
 </div>
@@ -22,6 +22,12 @@ export default {
     return {
       keyword: null,
       result: []
+    }
+  },
+  methods: {
+    handleclick (city) {
+      this.$store.commit('changecity', city)
+      this.$router.push('/')
     }
   },
   watch: {
