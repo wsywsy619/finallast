@@ -57,7 +57,7 @@ export default {
           if (x >= 0 && x < this.letters.length) {
             this.$emit('change', this.letters[x])
           }
-        }, 16)
+        }, 8)
       }
     },
     handeltouchend (e) {

@@ -5,7 +5,7 @@
     <div class="titile border-topbottom">当前城市</div>
     <div class="button-list">
       <div class="buttonwrapper">
-        <div class="button">{{this.$store.state.city}}</div>
+        <div class="button">{{this.current}}</div>
       </div>
     </div>
   </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import Bscroll from 'better-scroll'
 export default {
   name: 'citylist',
@@ -37,6 +38,11 @@ export default {
     cities: Object,
     hot: Array,
     change: String
+  },
+  computed: { // mapState从vuex中（index.js）映射到当前组件并映射给current然后就i相当于在computed中启用了current(this.current)
+    ...mapState({
+      current: 'city'
+    })
   },
   methods: {
     handleclick (e) {
@@ -52,7 +58,9 @@ export default {
     }
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.wrapper)
+    this.scroll = new Bscroll(this.$refs.wrapper, {
+      click: true
+    })
   }
 }
 </script>

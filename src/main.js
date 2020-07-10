@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import fastClick from 'fastclick'
 import '../node_modules/vue-awesome-swiper/node_modules/swiper/dist/css/swiper.css'
-import store from './store'
+import store from './store'// 从store文件夹下引入index.js
 import 'styles/reset.css'
 import 'styles/border.css'
 import 'styles/iconfont.css'
