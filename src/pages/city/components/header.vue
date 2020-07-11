@@ -5,7 +5,8 @@
     <div class="iconfont back-icon">&#xe61c;</div>
   </router-link>
 </div>
-<span>城市选择</span></div>
+<span>城市选择</span>
+</div>
 </template>
 
 <script>
