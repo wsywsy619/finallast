@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     handleScroll () {
-      console.log('123')
       const top = document.documentElement.scrollTop
       if (top <= 10) {
         this.show = true
@@ -59,6 +58,7 @@ export default {
 @import '~styles/variables.styl'
 @import '~styles/mixins.styl'
 .headerfixed
+  z-index: 2
   position: fixed
   width: 100%
   left: 0
