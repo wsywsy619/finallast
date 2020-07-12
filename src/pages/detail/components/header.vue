@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     handleScroll () {
+      console.log('123')
       const top = document.documentElement.scrollTop
       if (top <= 10) {
         this.show = true
@@ -47,11 +48,10 @@ export default {
     }
   },
   activated () {
-    console.log('activated')
-  },
-  mounted () {
     window.addEventListener('scroll', this.handleScroll)
-    console.log('mounted')
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll) // window事件的解绑否则在home组件中上面绑定的函数也会执行
   }
 }
 </script>
