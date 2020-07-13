@@ -18,5 +18,11 @@ export default new Router({
     path: '/detail/:id',
     name: 'detail',
     component: detail
-  }]
+  }],
+  scrollBehavior (to, from, savedPositon) { // 用于解决路由切换时候停留问题（每次切换到不同的detail页面时候滚动条保持着上一层的页面）
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })

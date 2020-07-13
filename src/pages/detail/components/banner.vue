@@ -1,13 +1,13 @@
 <template>
 <div>
 <div class='banner' @click="handleclick">
-<img class="bannerimage" src="https://imgs.qunarzz.com/sight/p0/1701/88/885ec9c1584a572aa3.img.png_710x360_bf4dab2a.png"/>
+<img class="bannerimage" :src="bannerImg"/>
 <div class="banner-info">
-  <div class="banner-titile">开封府（AAAA景区）</div>
-  <div class="banner-number"><span class="iconfont">&#xe635;</span>{{this.imgs.length}}</div>
+  <div class="banner-titile">{{sightName}}</div>
+  <div class="banner-number"><span class="iconfont">&#xe635;</span>{{this.gallaryImgs.length}}</div>
 </div>
 </div>
-<commongallery v-if="show" @change="handlechange" :imgs="imgs"></commongallery>
+<commongallery v-if="show" @change="handlechange" :imgs="gallaryImgs"></commongallery>
 </div>
 </template>
 <script>
@@ -17,12 +17,14 @@ export default {
   components: {
     commongallery
   },
+  props: {
+    sightName: String,
+    bannerImg: String,
+    gallaryImgs: Array
+  },
   data () {
     return {
-      show: false,
-      imgs: ['https://imgs.qunarzz.com/sight/p0/1701/88/885ec9c1584a572aa3.img.png_710x360_bf4dab2a.png',
-        'https://imgs.qunarzz.com/sight/p0/201403/07/a5232bae168e6120050b0c72b49ed1a9.jpg_710x360_121ff592.jpg', 'https://imgs.qunarzz.com/sight/p0/201403/07/0971f37f898ca09615b4375136c5c381.jpg_710x360_58763fc7.jpg', 'https://imgs.qunarzz.com/sight/p0/201309/16/dd7de3d58f8ac96dc8d65eac.jpg_710x360_8c605ecf.jpg'
-      ]
+      show: false
     }
   },
   methods: {

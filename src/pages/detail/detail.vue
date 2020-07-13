@@ -1,10 +1,10 @@
 <template>
 <div>
-<detailbanner>
+<detailbanner :sightName="sightName" :bannerImg="bannerImg" :gallaryImgs="gallaryImgs">
 </detailbanner>
 <detailheader>
 </detailheader>
-<detaillist :list="list">
+<detaillist :list="categoryList">
 </detaillist>
 <div class="content">
 </div>
@@ -14,6 +14,7 @@
 import detailbanner from './components/banner'
 import detailheader from './components/header'
 import detaillist from './components/list'
+import axios from 'axios'
 export default {
   name: 'detail',
   components: {
@@ -23,6 +24,10 @@ export default {
   },
   data () {
     return {
+      categoryList: [],
+      gallaryImgs: [],
+      sightName: '',
+      bannerImg: '',
       list: [{
         title: '成人票',
         children: [{
@@ -54,6 +59,28 @@ export default {
         }]
       }]
     }
+  },
+  methods: {
+    getHomeInfo () {
+      axios.get('/api/detail.json?id=', {
+        params: {
+          id: this.$route.params.id
+        }
+      }).then(this.handleget)
+    },
+    handleget (res) {
+      res = res.data
+      if (res.ret && res.data) {
+        const data = res.data
+        this.sightName = data.sightName
+        this.bannerImg = data.bannerImg
+        this.gallaryImgs = data.gallaryImgs
+        this.categoryList = data.categoryList
+      }
+    }
+  },
+  mounted () {
+    this.getHomeInfo()
   }
 }
 </script>
